@@ -11,16 +11,16 @@ public class TempAndHumidity {
     private float temperature;
     private float humidity;
 
-    public TempAndHumidity() {
-
-        // setup wiringPi
-        if (Gpio.wiringPiSetup() == -1) {
-            System.out.println(" ==>> GPIO SETUP FAILED");
-            return;
-        }
-
-        GpioUtil.export(3, GpioUtil.DIRECTION_OUT);
-    }
+//    public TempAndHumidity() {
+//
+//        // setup wiringPi
+//        if (Gpio.wiringPiSetup() == -1) {
+//            System.out.println(" ==>> GPIO SETUP FAILED");
+//            return;
+//        }
+//
+//        GpioUtil.export(3, GpioUtil.DIRECTION_OUT);
+//    }
 
 
     public void getTemperatureFromPi(final int pin) {
@@ -76,7 +76,7 @@ public class TempAndHumidity {
                 c = -c;
             }
             final float f = c * 1.8f + 32;
-//            System.out.println("Humidity = " + h + " Temperature = " + c + "(" + f + "f)");
+            System.out.println("Humidity = " + h + " Temperature = " + c + "(" + f + "f)");
             this.humidity = h;
             this.temperature = c;
         } else {

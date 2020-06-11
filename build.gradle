@@ -15,6 +15,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compile group: 'com.pi4j', name: 'pi4j-core', version: '1.2'
+	compile group: 'com.pi4j', name: 'pi4j-device', version: '1.2'
+	compile group: 'com.pi4j', name: 'pi4j-gpio-extension', version: '1.2'
+	compile group: 'com.pi4j', name: 'pi4j-native', version: '1.2', ext: 'pom'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
