@@ -13,14 +13,17 @@ public class TempAndHumidity {
 
 //    public TempAndHumidity() {
 //
-//        // setup wiringPi
-//        if (Gpio.wiringPiSetup() == -1) {
-//            System.out.println(" ==>> GPIO SETUP FAILED");
-//            return;
-//        }
 //
-//        GpioUtil.export(3, GpioUtil.DIRECTION_OUT);
 //    }
+    public void initWiringPi(){
+        // setup wiringPi
+        if (Gpio.wiringPiSetup() == -1) {
+            System.out.println(" ==>> GPIO SETUP FAILED");
+            return;
+        }
+
+        GpioUtil.export(3, GpioUtil.DIRECTION_OUT);
+    }
 
 
     public void getTemperatureFromPi(final int pin) {
@@ -90,30 +93,26 @@ public class TempAndHumidity {
         return dht11_dat[4] == (dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3] & 0xFF);
     }
 
-//    public static void main(final String ars[]) throws Exception {
-//
-//        final TempAndHumidity dht = new TempAndHumidity();
-//
-//        for (int i = 0; i < 10; i++) {
-//            Thread.sleep(2000);
-//            dht.getTemperatureFromPi(2);
-//        }
-//        System.out.println("Done!!");
-//    }
     public String getData()  {
         final TempAndHumidity dht = new TempAndHumidity();
+        dht.initWiringPi();
+        String result = "";
         String data = "";
         try{
             for (int i = 0; i < 10; i++) {
                 Thread.sleep(2000);
                 dht.getTemperatureFromPi(2);
+                result = dht.humidity +" " + dht.temperature;
+                if(dht.humidity>1){
+                    break;
+                }
             }
-        System.out.println("final humidity" + this.humidity);
-//            data = this.humidity + " " + this.temperature;
-            data = "done" + this.humidity + this.temperature;
+            data = result;
         }catch (InterruptedException e){
             System.out.println("something went wrong" + e.getCause());
         }
         return data;
     }
+
+
 }
