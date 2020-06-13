@@ -64,22 +64,22 @@ public class TempAndHumidity {
         // check we read 40 bits (8bit x 5 ) + verify checksum in the last
         // byte
         if (j >= 40 && checkParity()) {
-            float h = (float) ((dht11_dat[0] << 8) + dht11_dat[1]) / 10;
-            if (h > 100) {
-                h = dht11_dat[0]; // for DHT11
+            this.humidity = (float) ((dht11_dat[0] << 8) + dht11_dat[1]) / 10;
+            if (this.humidity > 100) {
+                this.humidity = dht11_dat[0]; // for DHT11
             }
-            float c = (float) (((dht11_dat[2] & 0x7F) << 8) + dht11_dat[3]) / 10;
-            if (c > 125) {
-                c = dht11_dat[2]; // for DHT11
+            this.temperature = (float) (((dht11_dat[2] & 0x7F) << 8) + dht11_dat[3]) / 10;
+            if (this.temperature > 125) {
+                this.temperature = dht11_dat[2]; // for DHT11
             }
             if ((dht11_dat[2] & 0x80) != 0) {
-                c = -c;
+                this.temperature = -this.temperature;
             }
-            final float f = c * 1.8f + 32;
+            final float f = this.temperature * 1.8f + 32;
 //            System.out.println("Humidity = " + h + " Temperature = " + c + "(" + f + "f)");
-            this.humidity = h;
-            this.temperature = c;
-            System.out.println("new Humidity = " + this.humidity + " new Temperature = " + this.temperature + "(" + f + "f)");
+//            this.humidity = h;
+//            this.temperature = c;
+            System.out.println("new new Humidity = " + this.humidity + " new Temperature = " + this.temperature + "(" + f + "f)");
 
         } else {
             System.out.println("Data not good, skip");
@@ -108,8 +108,9 @@ public class TempAndHumidity {
                 Thread.sleep(2000);
                 dht.getTemperatureFromPi(2);
             }
-//        System.out.println("Done!!");
-            data = this.humidity + " " + this.temperature;
+        System.out.println("final humidity" + this.humidity);
+//            data = this.humidity + " " + this.temperature;
+            data = "done" + this.humidity + this.temperature;
         }catch (InterruptedException e){
             System.out.println("something went wrong" + e.getCause());
         }
