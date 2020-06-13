@@ -11,10 +11,24 @@ public class TempAndHumidity {
     private float temperature;
     private float humidity;
 
-//    public TempAndHumidity() {
-//
-//
-//    }
+    public void setTemperature(float temperature) {
+        getData();
+        this.temperature = temperature;
+    }
+
+    public void setHumidity(float humidity) {
+        getData();
+        this.humidity = humidity;
+    }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public float getHumidity() {
+        return humidity;
+    }
+
     public void initWiringPi(){
         // setup wiringPi
         if (Gpio.wiringPiSetup() == -1) {
@@ -79,10 +93,7 @@ public class TempAndHumidity {
                 this.temperature = -this.temperature;
             }
             final float f = this.temperature * 1.8f + 32;
-//            System.out.println("Humidity = " + h + " Temperature = " + c + "(" + f + "f)");
-//            this.humidity = h;
-//            this.temperature = c;
-            System.out.println("new new Humidity = " + this.humidity + " new Temperature = " + this.temperature + "(" + f + "f)");
+//            System.out.println("Humidity = " + this.humidity + " Temperature = " + this.temperature + "(" + f + "f)");
 
         } else {
             System.out.println("Data not good, skip");
@@ -93,26 +104,18 @@ public class TempAndHumidity {
         return dht11_dat[4] == (dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3] & 0xFF);
     }
 
-    public String getData()  {
-        final TempAndHumidity dht = new TempAndHumidity();
-        dht.initWiringPi();
-        String result = "";
-        String data = "";
+    public void getData()  {
+        initWiringPi();
         try{
             for (int i = 0; i < 10; i++) {
                 Thread.sleep(2000);
-                dht.getTemperatureFromPi(2);
-                result = dht.humidity +" " + dht.temperature;
-                if(dht.humidity>1){
+                getTemperatureFromPi(2);
+                if(this.humidity>1 && this.temperature>1){
                     break;
                 }
             }
-            data = result;
         }catch (InterruptedException e){
             System.out.println("something went wrong" + e.getCause());
         }
-        return data;
     }
-
-
 }
