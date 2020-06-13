@@ -21,15 +21,16 @@ public class LedController {
 
     @RequestMapping("/toggle")
     @CrossOrigin(origins = "http://192.168.0.101:3000")
-    public String light(){
+    public String toggleLed(){
         getPin().toggle();
         return checkState();
     }
 
+
     @RequestMapping("/blink")
     @CrossOrigin(origins = "http://192.168.0.101:3000")
-    public String blink(){
-        getPin().blink(200l,5000l);
+    public String blinkLed(){
+        getPin().blink(200L, 7000L);
         return "blinking...";
     }
     public GpioPinDigitalOutput getPin(){
