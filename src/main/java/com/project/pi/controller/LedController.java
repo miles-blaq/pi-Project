@@ -1,6 +1,7 @@
 package com.project.pi.controller;
 
 import com.pi4j.io.gpio.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,7 @@ public class LedController {
     private GpioPinDigitalOutput pin;
 
     @RequestMapping("/")
+    @CrossOrigin(origins = "http://192.168.0.101:3000")
     public String greeting(){
         return "hello world";
     }
@@ -18,12 +20,14 @@ public class LedController {
     }
 
     @RequestMapping("/toggle")
+    @CrossOrigin(origins = "http://192.168.0.101:3000")
     public String light(){
         getPin().toggle();
         return checkState();
     }
 
     @RequestMapping("/blink")
+    @CrossOrigin(origins = "http://192.168.0.101:3000")
     public String blink(){
         getPin().blink(200l,5000l);
         return "blinking...";
