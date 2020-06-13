@@ -14,10 +14,23 @@ public class TempSensorController {
     @Autowired
     private SensorService sensorService;
 
-    @GetMapping("/temp")
-    public ResponseEntity<SensorData> reqSensorDate() {
+    @GetMapping("/tempAndHumidity")
+    public ResponseEntity<SensorData> reqSensorData() {
         SensorData sensorData = sensorService.getSensorData();
         return ResponseEntity.ok(sensorData);
     }
+
+    @GetMapping("/temperature")
+    public ResponseEntity<SensorData> reqTemperatureData() {
+        SensorData temperatureData = sensorService.getTemperatureData();
+        return ResponseEntity.ok(temperatureData );
+    }
+
+    @GetMapping("/humidity")
+    public ResponseEntity<SensorData> reqHumidityData() {
+        SensorData humidityData = sensorService.getHumidityData();
+        return ResponseEntity.ok(humidityData );
+    }
+
 
 }

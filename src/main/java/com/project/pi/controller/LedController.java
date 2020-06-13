@@ -13,13 +13,26 @@ public class LedController {
         return "hello world";
     }
 
-    @RequestMapping("/lights")
+    public String checkState(){
+        return (getPin().isHigh()?"light is on":"light is off");
+    }
+
+    @RequestMapping("/toggle")
     public String light(){
+        getPin().toggle();
+        return checkState();
+    }
+
+    @RequestMapping("/blink")
+    public String blink(){
+        getPin().blink(200l,5000l);
+        return "blinking...";
+    }
+    public GpioPinDigitalOutput getPin(){
         if(pin == null){
             GpioController gpio = GpioFactory.getInstance();
             pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04,"myLed", PinState.LOW);
         }
-        pin.toggle();
-        return "OK";
+        return pin;
     }
 }

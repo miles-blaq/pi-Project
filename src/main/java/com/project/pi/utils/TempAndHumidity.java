@@ -12,20 +12,20 @@ public class TempAndHumidity {
     private float humidity;
 
     public void setTemperature(float temperature) {
-        getData();
         this.temperature = temperature;
     }
 
     public void setHumidity(float humidity) {
-        getData();
         this.humidity = humidity;
     }
 
     public float getTemperature() {
+        getData();
         return temperature;
     }
 
     public float getHumidity() {
+        getData();
         return humidity;
     }
 

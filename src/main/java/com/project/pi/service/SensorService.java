@@ -14,4 +14,11 @@ public class SensorService {
     public SensorData getSensorData() {
         return new SensorData(tempAndHumidity.getTemperature(),tempAndHumidity.getHumidity());
     }
+
+    public SensorData getTemperatureData(){
+        return new SensorData(tempAndHumidity.getTemperature());
+    }
+    public SensorData getHumidityData(){
+        return new SensorData(tempAndHumidity.getHumidity());
+    }
 }
