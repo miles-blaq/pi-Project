@@ -76,9 +76,11 @@ public class TempAndHumidity {
                 c = -c;
             }
             final float f = c * 1.8f + 32;
-            System.out.println("Humidity = " + h + " Temperature = " + c + "(" + f + "f)");
+//            System.out.println("Humidity = " + h + " Temperature = " + c + "(" + f + "f)");
             this.humidity = h;
             this.temperature = c;
+            System.out.println("new Humidity = " + this.humidity + " new Temperature = " + this.temperature + "(" + f + "f)");
+
         } else {
             System.out.println("Data not good, skip");
         }
